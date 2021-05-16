@@ -1,7 +1,9 @@
 FROM composer AS composer
 FROM php:fpm-alpine
-ENV SIMA_LOGIN=login
-ENV SIMA_PASS=pass
+ARG SIMA_LOGIN
+ARG SIMA_PASS
+ENV SIMA_LOGIN=${SIMA_LOGIN}
+ENV SIMA_PASS=${SIMA_PASS}
 WORKDIR /app
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apk update && apk add git curl wget bash jq
